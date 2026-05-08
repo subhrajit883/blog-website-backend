@@ -5,6 +5,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import postRoutes from "./routes/post.js";
 import categoryRoutes from "./routes/category.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config({quiet: true});
 
@@ -23,6 +24,8 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/categories", categoryRoutes);
+
+app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
